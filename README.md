@@ -158,10 +158,10 @@ NODE_ENV=production
   - README.md
 
 Performance Metrics
-File Size Processing Time Memory Usage
-1MB           120ms         ~15MB
-100MB         8.2s         ~18MB
-1GB           1m 22s       ~22MB
+File Size     Processing Time       Memory Usage
+  1MB           120ms                 ~15MB
+  100MB         8.2s                  ~18MB
+  1GB           1m 22s                ~22MB
 
 Troubleshooting
 Common Issues:
