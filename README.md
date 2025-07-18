@@ -103,10 +103,10 @@ Boston,2023-01-01,50
 New York,2023-01-01,30
 
 API Endpoints
-Endpoint Method Description
-/upload POST Upload CSV file
-/download/:filename GET Download processed results
-/api/health GET Server health check
+Endpoint                Method     Description
+/upload                 POST       Upload CSV file
+/download/:filename     GET        Download processed results
+/api/health             GET        Server health check
 
 Testing
 Run backend tests:
@@ -134,11 +134,6 @@ NODE_ENV=production
 - Deploy built files to Netlify, Vercel, or S3
 - Set API base URL in environment variables
 
-## Project Structure
-
-### Alternative Format (If You Prefer Bullet Points):
-
-```markdown
 ## Project Structure
 
 - **csv-app/**
@@ -173,6 +168,10 @@ Common Issues:
 - CSV format errors: Verify file uses commas, not tabs
 ```
 
-```
-
-```
+Memory Efficiency Strategies
+Strategy	                                                      Implementation	                          Memory Benefit	                        Big-O Impact
+Stream Processing	                                              fs.createReadStream + csv-parser	        Processes files in chunks (64KB)	        O(1) memory
+Incremental Aggregation	                                        JavaScript Map() for department sums	    Only stores unique departments	          O(d)* memory
+Worker Threads	                                                Node.js worker_threads for >10MB files	  Isolates memory to separate threads	      O(n) → O(1)**
+Chunked File Writing	                                          csv-stringify with callback               streams	No full CSV string in memory	      O(1) memory
+Temp File Cleanup	                                              Automatic fs.unlink post-processing	      Prevents disk memory leaks	
