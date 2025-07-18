@@ -1,0 +1,25 @@
+# Node
+node_modules/
+dist/
+*.log
+npm-debug.log*
+
+# Environment
+.env
+.env.local
+
+# IDE
+.vscode/
+.idea/
+
+# System
+.DS_Store
+Thumbs.db
+
+# Server specific
+server/temp/
+server/uploads/
+
+# Client specific
+csv-client/.env
+csv-client/build/
