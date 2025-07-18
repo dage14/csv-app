@@ -136,7 +136,6 @@ NODE_ENV=production
 
 ## Project Structure
 
-### Alternative Format (If You Prefer Bullet Points):
 
 ```markdown
 ## Project Structure
