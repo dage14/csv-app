@@ -103,10 +103,10 @@ Boston,2023-01-01,50
 New York,2023-01-01,30
 
 API Endpoints
-Endpoint Method Description
-/upload POST Upload CSV file
-/download/:filename GET Download processed results
-/api/health GET Server health check
+Endpoint                Method     Description
+/upload                 POST       Upload CSV file
+/download/:filename     GET        Download processed results
+/api/health             GET        Server health check
 
 Testing
 Run backend tests:
@@ -134,10 +134,6 @@ NODE_ENV=production
 - Deploy built files to Netlify, Vercel, or S3
 - Set API base URL in environment variables
 
-## Project Structure
-
-
-```markdown
 ## Project Structure
 
 - **csv-app/**
