@@ -26,8 +26,10 @@ export class CSVController {
                 return res.status(400).json({ error: 'File must be comma-delimited' });
             }
 
-            // Process file
-            const resultFilename = await processor.processFile(tempPath);
+            // Process file Use worker for files > 10MB
+            const resultFilename = fs.statSync(tempPath).size > 10 * 1024 * 1024
+                ? await processor.processFileWithWorker(tempPath)
+                : await processor.processFile(tempPath);
             
             res.json({
                 message: 'File processed successfully',

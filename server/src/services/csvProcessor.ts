@@ -3,6 +3,7 @@ import path from 'path';
 import { stringify } from 'csv-stringify';
 import csv from 'csv-parser'
 import { v4 as uuidv4 } from 'uuid';
+import { Worker } from 'worker_threads';
 
 export class CSVProcessor {
     private tempDir: string;
@@ -77,4 +78,32 @@ export class CSVProcessor {
         }
         return path.join(this.tempDir, filename);
     }
+
+    public async processFileWithWorker(inputPath: string): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const worker = new Worker(path.join(__dirname, '../workers/csvWorker.js'), {
+        workerData: { filePath: inputPath }
+      });
+
+      worker.on('message', (message) => {
+        if (message.success) {
+          resolve(message.filename);
+        } else {
+          reject(new Error(message.error));
+        }
+        worker.terminate();
+      });
+
+      worker.on('error', (error) => {
+        reject(error);
+        worker.terminate();
+      });
+
+      worker.on('exit', (code) => {
+        if (code !== 0) {
+          reject(new Error(`Worker stopped with exit code ${code}`));
+        }
+      });
+    });
+  }
 }
