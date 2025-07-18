@@ -6,16 +6,23 @@ import { v4 as uuidv4 } from "uuid";
 import { Worker } from "worker_threads";
 
 export class CSVProcessor {
-  private tempDir: string;
+  public tempDir: string;
 
   constructor() {
     this.tempDir = path.join(__dirname, "../../temp");
     this.ensureTempDir();
   }
 
-  private ensureTempDir() {
-    if (!fs.existsSync(this.tempDir)) {
+  private ensureTempDir(): void {
+    try {
       fs.mkdirSync(this.tempDir, { recursive: true });
+      // Verify creation
+      if (!fs.existsSync(this.tempDir)) {
+        throw new Error("Directory creation failed");
+      }
+    } catch (error) {
+      console.error("Could not create temp directory:", error);
+      throw error; // Rethrow to fail fast
     }
   }
 
